@@ -1,8 +1,11 @@
 #include <iostream> // std::cout
+#include <string> // include the <string> system header
+
+using std::string;
 
 int Sum(int a, int b); // Declaring a sum function
 
-void main()
+int main()
 {
 	std::cout << "Hello World!" << std::endl;
 
@@ -10,7 +13,15 @@ void main()
 
 	std::cout << total << std::endl;
 
-	return;
+	// std::string and Copying
+	string firstName = "Alex";
+	string lastName = "Wood";
+
+	string fullName = firstName + ' ' + lastName;
+
+	std::cout << fullName << std::endl;
+
+	return 0;
 }
 
 int Sum(int a, int b)
