@@ -44,15 +44,28 @@ const int* BinarySearch(const int* arr, int count, int searchVal)
 	// TODO: Implement a binary search
 	// the array is assumed to be sorted
 
-	int l = 0;
-	while (l < count)
-	{
-		l++;
-	}
-
 	// This method should:
 	//	- Return: nullptr if the value is not found
 	//  - Return: pointer to the found value in the array
 	
+	int l = 0;
+	int r = count - 1;
+	while (l <= r)
+	{
+		int m = (l + r) / 2;
+		if (arr[m] == searchVal)
+		{
+			return &arr[m];
+		}
+		if (arr[m] < searchVal)
+		{
+			l = m + 1;
+		}
+		if (arr[m] > searchVal)
+		{
+			r = m - 1;
+		}
+	}
+
 	return nullptr;
 }
