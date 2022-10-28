@@ -21,6 +21,7 @@
 
 #include "raylib.h"
 #include "DataFile.h"
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -34,7 +35,7 @@ int main(int argc, char* argv[])
     DataFile data;
     int currentRecordIdx = 0;
 
-    data.Load("npc_data.dat");
+    data.Load("npc_data.dat", 0);
 
     DataFile::Record* currentRecord = data.GetRecord(currentRecordIdx);
     Texture2D recordTexture = LoadTextureFromImage(currentRecord->image);
@@ -58,6 +59,7 @@ int main(int argc, char* argv[])
             {
                 currentRecordIdx = 0;
             }
+            std::cout << "left" << std::endl;
             currentRecord = data.GetRecord(currentRecordIdx);
             recordTexture = LoadTextureFromImage(currentRecord->image);
         }
@@ -69,6 +71,7 @@ int main(int argc, char* argv[])
             {
                 currentRecordIdx = data.GetRecordCount();
             }
+            std::cout << "right" << std::endl;
             currentRecord = data.GetRecord(currentRecordIdx);
             recordTexture = LoadTextureFromImage(currentRecord->image);
         }
