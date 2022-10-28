@@ -96,7 +96,16 @@ int main()
 		}
 	}
 
-	std::cout << zombies[0].Name << " is the victor!" << std::endl;
+	std::cout << zombies[0].Name << " is the victor!\n" << std::endl;
+
+	if (zombies[0].Name == "Player")
+	{
+		std::cout << "Victory!" << std::endl;
+	}
+	else
+	{
+		std::cout << "Defeat!" << std::endl;
+	}
 
 	// for clean-up!
 	delete[] zombies;
