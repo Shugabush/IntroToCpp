@@ -86,9 +86,15 @@ void DataFile::Load(string filename, int index)
 		infile.read((char*)&tempHeight, sizeof(int));
 		infile.read((char*)&tempNameSize, sizeof(int));
 		infile.read((char*)&tempAgeSize, sizeof(int));
+
+		// Get where we are in the file and set size to that
 		size = infile.tellg();
+
+		// Add image, name, and age sizes to the size variable
 		size += sizeof(Color) * tempWidth * tempHeight;
 		size += tempNameSize + tempAgeSize;
+
+		// Shift the file location over to where the size is
 		infile.seekg(size);
 	}
 
