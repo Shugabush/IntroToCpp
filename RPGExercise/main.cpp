@@ -16,10 +16,11 @@ int main()
 	int zombieCount = RandomRange(5, 10);
 
 	Zombie* zombies = new Zombie[zombieCount];
-	Sword playerSword = { 2 };
-	Shield playerShield = { 2 };
-	zombies[0] = Zombie(playerSword, playerShield, 10, 2, 3); // for the player!
+	Sword playerSword = { 50 };
+	Shield playerShield = { 50 };
+	zombies[0] = Zombie(playerSword, playerShield, 20, 2, 3); // for the player!
 	zombies[0].Name = "Player";
+	zombies[0].IsPlayer = true;
 
 	std::string names[] =
 	{
@@ -85,7 +86,7 @@ int main()
 		for (int i = 0; i < zombiesLeft; i++)
 		{
 			// TODO: avoid attacking ourselves
-				// pick a random target
+			// pick a random target
 			int targetIndex = (i + RandomRange(1, zombiesLeft)) % zombiesLeft;
 
 			std::cout << "Zombie " << zombies[i].Name << " is attacking!" << std::endl;
@@ -115,7 +116,8 @@ int main()
 
 	std::cout << zombies[0].Name << " is the victor!\n" << std::endl;
 
-	if (zombies[0].Name == "Player")
+	// Check if the player has won
+	if (zombies[0].IsPlayer)
 	{
 		std::cout << "Victory!" << std::endl;
 	}

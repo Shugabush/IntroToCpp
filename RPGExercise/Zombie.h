@@ -15,6 +15,7 @@ class Zombie
 
 public:
 	std::string Name;
+	bool IsPlayer;
 
 	Zombie();
 	Zombie(Sword sword, Shield shield, int startHealth, int startPower, int startDefense);

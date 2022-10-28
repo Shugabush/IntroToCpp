@@ -7,9 +7,10 @@ Zombie::Zombie()
 	Health = 0;
 	Power = 0;
 	Defense = 0;
+	IsPlayer = false;
 }
 
-Zombie::Zombie(Sword sword, Shield shield, int startHealth, int startPower, int startDefense)
+Zombie::Zombie(Sword sword, Shield shield, int startHealth, int startPower, int startDefense) : Zombie()
 {
 	this->sword = sword;
 	this->shield = shield;
@@ -33,8 +34,8 @@ int Zombie::GetDefense()
 
 void Zombie::Attack(Zombie* victim)
 {
-	std::cout << "Zombie attacks for " << Power << " Damage" << std::endl;
-	victim->TakeDamage(Power);
+	std::cout << "Zombie attacks for " << Power + sword.GetStrength() << " Damage" << std::endl;
+	victim->TakeDamage(Power + sword.GetStrength());
 }
 
 void Zombie::TakeDamage(int damageDealt)
