@@ -15,12 +15,14 @@ int main()
 	// the number of zombies to have
 	int zombieCount = RandomRange(5, 10);
 
+	Sword playerSword = { 2 };
+	Shield playerShield = { 2 };
+	Zombie playerZombie = Zombie(playerSword, playerShield, 10, 3, 2);
+	playerZombie.Name = "Player";
+	playerZombie.IsPlayer = true;
+
 	Zombie* zombies = new Zombie[zombieCount];
-	Sword playerSword = { 50 };
-	Shield playerShield = { 50 };
-	zombies[0] = Zombie(playerSword, playerShield, 20, 2, 3); // for the player!
-	zombies[0].Name = "Player";
-	zombies[0].IsPlayer = true;
+	zombies[0] = playerZombie;
 
 	std::string names[] =
 	{
