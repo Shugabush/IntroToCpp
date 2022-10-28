@@ -16,22 +16,24 @@ int main()
 	int zombieCount = 5 + (std::rand() % 3);
 
 	Zombie* zombies = new Zombie[zombieCount];
-	zombies[0] = Zombie(10, 6, 3); // for the player!
+	Sword playerSword = { 2 };
+	Shield playerShield = { 2 };
+	zombies[0] = Zombie(playerSword, playerShield, 10, 6, 3); // for the player!
 
 	// skip first zombie - that's for the player (special!)
 	for (int i = 1; i < zombieCount; i++)
 	{
+		Sword sword = { 2 };
+		Shield shield = { 2 };
+
 		int startHealth = 10 + (std::rand() % 6);
-		zombies[i] = Zombie(startHealth, 2, 1);
+		zombies[i] = Zombie(sword, shield, startHealth, 2, 1);
 	}
 
 	int zombiesLeft = zombieCount;
 
-	int loopCount = 0;
-
 	while (zombiesLeft > 1)
 	{
-		loopCount++;
 		zombiesLeft = zombieCount;
 		for (int i = 0; i < zombieCount; i++)
 		{
@@ -42,6 +44,16 @@ int main()
 				{
 					targetZombieIndex++;
 				}
+				if (zombies[targetZombieIndex].IsDead())
+				{
+					std::cout << "WARNING: ATTACKING A DEAD ZOMBIE" << std::endl;
+				}
+				std::cout << "Zombie " << i;
+				std::cout << " attacked zombie " << targetZombieIndex;
+				std::cout << ", dealing " << zombies[i].GetPower() << " damage" << std::endl;
+				
+				std::cout << "Zombie " << targetZombieIndex << " has " << zombies[targetZombieIndex].GetHealth() << " left\n" << std::endl;
+
 				zombies[i].Attack(&zombies[targetZombieIndex]);
 			}
 			else
