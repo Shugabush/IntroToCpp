@@ -1,9 +1,11 @@
 #include "Zombie.h"
+#include "MathUtils.h"
 
 #include <iostream>
 
 Zombie::Zombie()
 {
+	MaxHealth = 3;
 	Health = 0;
 	Power = 0;
 	Defense = 0;
@@ -14,6 +16,7 @@ Zombie::Zombie(Sword sword, Shield shield, int startHealth, int startPower, int 
 {
 	this->sword = sword;
 	this->shield = shield;
+	MaxHealth = startHealth;
 	Health = startHealth;
 	Power = startPower;
 	Defense = startDefense;
@@ -36,6 +39,11 @@ void Zombie::Attack(Zombie* victim)
 {
 	std::cout << "Zombie attacks for " << Power + sword.GetStrength() << " Damage" << std::endl;
 	victim->TakeDamage(Power + sword.GetStrength());
+}
+
+void Zombie::Heal(int healing)
+{
+	Health = Clamp(Health + healing, 0, MaxHealth);
 }
 
 void Zombie::TakeDamage(int damageDealt)

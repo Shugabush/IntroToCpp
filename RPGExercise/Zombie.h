@@ -6,16 +6,17 @@
 
 class Zombie
 {
-	int Health;
-	int Power;
-	int Defense;
-
-	Shield shield;
-	Sword sword;
 
 public:
 	std::string Name;
 	bool IsPlayer;
+
+	int MaxHealth;
+	int Health;
+	int Power;
+	int Defense;
+	Shield shield;
+	Sword sword;
 
 	Zombie();
 	Zombie(Sword sword, Shield shield, int startHealth, int startPower, int startDefense);
@@ -28,6 +29,8 @@ public:
 	// Attack another zombie
 	// (will call TakeDamage to apply damage)
 	void Attack(Zombie* victim);
+
+	void Heal(int healing);
 
 	// Handle taking damage
 	// (will consider DEF before subtracting health)
