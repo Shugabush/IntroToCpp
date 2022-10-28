@@ -16,7 +16,7 @@ int main()
 	int zombieCount = 5 + (std::rand() % 3);
 
 	Zombie* zombies = new Zombie[zombieCount];
-	zombies[0] = Zombie(10, 8, 3); // for the player!
+	zombies[0] = Zombie(10, 6, 3); // for the player!
 
 	// skip first zombie - that's for the player (special!)
 	for (int i = 1; i < zombieCount; i++)
@@ -46,6 +46,9 @@ int main()
 			}
 			else
 			{
+				Zombie temp = zombies[i];
+				zombies[i] = zombies[zombieCount - 1];
+				zombies[zombieCount - 1] = temp;
 				zombiesLeft--;
 			}
 		}
