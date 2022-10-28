@@ -28,7 +28,9 @@ public:
 	void AddRecord(string imageFilename, string name, int age);
 	Record* GetRecord(int index);
 
-	int GetRecordCount() { return recordCount; };
+	// Subtract 1 from the record count so that when you press the right arrow
+	// You'll never get a crash when you're on the last record
+	int GetRecordCount() { return recordCount - 1; };
 
 	void Save(string filename);
 	void Load(string filename);

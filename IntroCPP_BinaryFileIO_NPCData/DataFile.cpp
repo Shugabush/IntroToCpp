@@ -86,11 +86,14 @@ void DataFile::Load(string filename)
 		infile.read(imgdata, imageSize);
 
 		Image img = LoadImageEx((Color*)imgdata, width, height);
-		char* name = new char[nameSize];
+		char* name = new char[nameSize + 1]; // Add one to the nameSize for the actual array size to make room for the null terminator
 		int age = 0;
-				
+		
 		infile.read((char*)name, nameSize);
 		infile.read((char*)&age, ageSize);
+
+		// Add the null terminator
+		name[nameSize] = '\0';
 
 		Record* r = new Record();
 		r->image = img;
