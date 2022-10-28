@@ -21,3 +21,16 @@ int RandomRange(int minInclusive, int maxExclusive)
 {
 	return minInclusive + (std::rand() % (maxExclusive - minInclusive));
 }
+
+int Clamp(int value, int min, int max)
+{
+	if (value < min)
+	{
+		value = min;
+	}
+	else if (value > max)
+	{
+		value = max;
+	}
+	return value;
+}
