@@ -45,7 +45,7 @@ void Zombie::TakeDamage(int damageDealt)
 		actualDamage = 1;
 	}
 	Health -= actualDamage;
-	std::cout << "Zombie takes " << actualDamage << std::endl;
+	std::cout << "Zombie takes " << actualDamage << " Damage" << std::endl;
 	std::cout << "Zombie has " << Health << " Health remaining!" << std::endl;
 }
 

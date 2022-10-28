@@ -13,7 +13,7 @@ int main()
 	int randomInt = RandomRange(0, 11);
 
 	// the number of zombies to have
-	int zombieCount = RandomRange(5, 7);
+	int zombieCount = RandomRange(5, 10);
 
 	Zombie* zombies = new Zombie[zombieCount];
 	Sword playerSword = { 2 };
@@ -37,6 +37,7 @@ int main()
 		"Todd Howard",
 		"Alex"
 	};
+	int ancestry[13]{};
 
 	// skip first zombie - that's for the player (special!)
 	for (int i = 1; i < zombieCount; i++)
@@ -46,7 +47,18 @@ int main()
 
 		int startHealth = RandomRange(5, 11);
 		zombies[i] = Zombie(sword, shield, startHealth, 2, 1);
-		zombies[i].Name = names[RandomRange(0, 13)];
+
+		int nameIndex = RandomRange(0, 13);
+
+		if (ancestry[nameIndex] == 0)
+		{
+			zombies[i].Name = names[nameIndex];
+		}
+		else
+		{
+			zombies[i].Name = names[nameIndex] + " the " + std::to_string(ancestry[nameIndex] + 1);
+		}
+		ancestry[nameIndex]++;
 	}
 
 	int zombiesLeft = zombieCount;
