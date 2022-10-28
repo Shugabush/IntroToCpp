@@ -37,6 +37,23 @@ int main()
 		"Todd Howard",
 		"Alex"
 	};
+
+	std::string ancestryNames[] =
+	{
+		"2nd",
+		"3rd",
+		"4th",
+		"5th",
+		"6th",
+		"7th",
+		"8th",
+		"9th",
+		"10th",
+		"11th",
+		"12th",
+		"13th",
+	};
+
 	int ancestry[13]{};
 
 	// skip first zombie - that's for the player (special!)
@@ -56,7 +73,7 @@ int main()
 		}
 		else
 		{
-			zombies[i].Name = names[nameIndex] + " the " + std::to_string(ancestry[nameIndex] + 1);
+			zombies[i].Name = names[nameIndex] + " the " + ancestryNames[ancestry[nameIndex] - 1];
 		}
 		ancestry[nameIndex]++;
 	}
