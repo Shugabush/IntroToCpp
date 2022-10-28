@@ -2,6 +2,8 @@
 
 #include "Inventory.h"
 
+#include <string>
+
 class Zombie
 {
 	int Health;
@@ -12,6 +14,8 @@ class Zombie
 	Sword sword;
 
 public:
+	std::string Name;
+
 	Zombie();
 	Zombie(Sword sword, Shield shield, int startHealth, int startPower, int startDefense);
 

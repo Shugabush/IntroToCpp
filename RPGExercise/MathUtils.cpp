@@ -19,5 +19,5 @@ void SeedRandom(unsigned * seed)
 
 int RandomRange(int minInclusive, int maxExclusive)
 {
-	return minInclusive + (std::rand() % maxExclusive);
+	return minInclusive + (std::rand() % (maxExclusive - minInclusive));
 }

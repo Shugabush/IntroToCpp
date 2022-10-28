@@ -33,6 +33,7 @@ int Zombie::GetDefense()
 
 void Zombie::Attack(Zombie* victim)
 {
+	std::cout << "Zombie attacks for " << Power << " Damage" << std::endl;
 	victim->TakeDamage(Power);
 }
 
@@ -44,6 +45,8 @@ void Zombie::TakeDamage(int damageDealt)
 		actualDamage = 1;
 	}
 	Health -= actualDamage;
+	std::cout << "Zombie takes " << actualDamage << std::endl;
+	std::cout << "Zombie has " << Health << " Health remaining!" << std::endl;
 }
 
 bool Zombie::IsDead()

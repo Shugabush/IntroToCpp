@@ -2,6 +2,7 @@
 #include "MathUtils.h"
 
 #include <iostream>
+#include <cassert>
 
 int main()
 {
@@ -15,9 +16,27 @@ int main()
 	int zombieCount = RandomRange(5, 7);
 
 	Zombie* zombies = new Zombie[zombieCount];
-	Sword playerSword = { 5 };
-	Shield playerShield = { 5 };
-	zombies[0] = Zombie(playerSword, playerShield, 20, 6, 3); // for the player!
+	Sword playerSword = { 2 };
+	Shield playerShield = { 2 };
+	zombies[0] = Zombie(playerSword, playerShield, 10, 2, 3); // for the player!
+	zombies[0].Name = "Player";
+
+	std::string names[] =
+	{
+		"John",
+		"Uppy",
+		"Mario",
+		"Larissa",
+		"Luigi",
+		"Baird",
+		"Sally",
+		"Will",
+		"Elizabeth",
+		"Harold",
+		"Alexa",
+		"Todd Howard",
+		"Alex"
+	};
 
 	// skip first zombie - that's for the player (special!)
 	for (int i = 1; i < zombieCount; i++)
@@ -27,6 +46,7 @@ int main()
 
 		int startHealth = RandomRange(5, 11);
 		zombies[i] = Zombie(sword, shield, startHealth, 2, 1);
+		zombies[i].Name = names[RandomRange(0, 13)];
 	}
 
 	int zombiesLeft = zombieCount;
@@ -35,51 +55,36 @@ int main()
 	{
 		for (int i = 0; i < zombiesLeft; i++)
 		{
-			if (!zombies[i].IsDead())
-			{
-				int targetZombieIndex = RandomRange(0, zombieCount);
-				if (targetZombieIndex >= i && targetZombieIndex < zombieCount - 1)
-				{
-					targetZombieIndex++;
-				}
+			// TODO: avoid attacking ourselves
+				// pick a random target
+			int targetIndex = (i + RandomRange(1, zombiesLeft)) % zombiesLeft;
 
-				if (zombies[targetZombieIndex].IsDead())
-				{
-					std::cout << "WARNING: ATTACKING A DEAD ZOMBIE" << std::endl;
-				}
-				
-				zombies[i].Attack(&zombies[targetZombieIndex]);
-				
-				std::cout << "Zombie " << i;
-				std::cout << " attacked zombie " << targetZombieIndex;
-				std::cout << ", dealing " << zombies[i].GetPower() << " damage" << std::endl;
-				
-				std::cout << "Zombie " << targetZombieIndex << " has " << zombies[targetZombieIndex].GetHealth() << " left\n" << std::endl;
-			}
-			else
+			std::cout << "Zombie " << zombies[i].Name << " is attacking!" << std::endl;
+			std::cout << "Zombie " << zombies[targetIndex].Name << " is targeted!" << std::endl;
+
+			// attack as this zombie
+			// the other zombie recieves damage
+			zombies[i].Attack(&zombies[targetIndex]);
+
+			// check for defeat
+			if (zombies[targetIndex].IsDead())
 			{
+				std::cout << zombies[targetIndex].Name << " has been defeated!" << std::endl;
+
+				// swap it with the last active zombie
+				Zombie temp = zombies[zombiesLeft - 1];
+				zombies[zombiesLeft - 1] = zombies[targetIndex];
+				zombies[targetIndex] = temp;
+
+				// decrement the zombiesLeft count
 				zombiesLeft--;
-				Zombie temp = zombies[i];
-				zombies[i] = zombies[zombiesLeft - 1];
-				if (zombies[zombiesLeft - 1].IsDead())
-				{
-					std::cout << "here" << std::endl;
-				}
-				zombies[zombiesLeft - 1] = temp;
-				
 			}
+
+			std::cout << " ... " << std::endl;
 		}
 	}
-	if (zombies[0].IsDead())
-	{
-		// We lost!
-		std::cout << "Defeat!" << std::endl;
-	}
-	else
-	{
-		// We won!
-		std::cout << "Victory!" << std::endl;
-	}
+
+	std::cout << zombies[0].Name << " is the victor!" << std::endl;
 
 	// for clean-up!
 	delete[] zombies;
