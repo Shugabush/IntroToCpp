@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "raylib.h"
 #include <stdlib.h>
+#include <iostream>
 
 
 Application::Application()
@@ -57,11 +58,11 @@ void Application::Update(float deltaTime)
 
 		// Task 3:
 		// TODO: Calculate row and col index based on the mouse positon
-		int rowIndex = 0; 
-		int colIndex = 0;
+		int rowIndex = (int)(mousePos.x / m_tileWidth);
+		int colIndex = (int)(mousePos.y / m_tileHeight);
 
 		// TODO: calculate the index of the tile clicked on based on the row/col index
-		int tileIndex = 0;
+		int tileIndex = (rowIndex * ROWS) + colIndex;
 
 		m_tiles[tileIndex] += 1;
 		if (m_tiles[tileIndex] >= 5)
